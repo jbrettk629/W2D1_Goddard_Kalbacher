@@ -1,4 +1,8 @@
 require "io/console"
+require_relative "board.rb"
+require_relative "piece.rb"
+require_relative "display.rb"
+require "byebug"
 
 KEYMAP = {
   " " => :space,
@@ -32,16 +36,25 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board
+  attr_reader :cursor_pos, :board, :selected
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @selected = false
   end
 
   def get_input
     key = KEYMAP[read_char]
     handle_key(key)
+  end
+  
+  def toggle_selected
+    if @selected == true
+      @selected = false 
+    else 
+      @selected = true
+    end
   end
 
   private
@@ -75,9 +88,34 @@ class Cursor
     return input
   end
 
-  def handle_key(key)
+  def handle_key(key) #@current_pos == [0,0] board[@current_pos].VALID_MOVES
+    case key 
+      when :return
+        @cursor_pos
+      when :space
+        @cursor_pos
+      when :right
+        update_pos(MOVES[key])
+        nil 
+      when :left
+        update_pos(MOVES[key])
+        nil 
+      when :up
+        update_pos(MOVES[key])
+        nil 
+      when :down
+        update_pos(MOVES[key])
+        nil 
+      when :ctrl_c
+        Process.exit(0) 
+    end 
   end
 
   def update_pos(diff)
+    new_pos = [@cursor_pos[0] + diff[0], @cursor_pos[1] + diff[1]]
+    puts new_pos.inspect
+     board.valid_pos?(new_pos) ? @cursor_pos = new_pos : @cursor_pos = @cursor_pos 
   end
+  
+  
 end
