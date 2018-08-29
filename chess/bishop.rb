@@ -12,6 +12,10 @@ class Bishop < Piece
   def initialize(board, color)
     @symbol = "♝"
   end
+  
+  def moves
+    @moves = self.diagonal_dirs(@position)
+  end
 
   
 protected 

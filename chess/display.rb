@@ -45,11 +45,11 @@ if __FILE__ == $PROGRAM_NAME
   board = Board.new
   display = Display.new(board)
 
-  while true 
+  #while true 
     display.render 
     display.cursor.get_input
     system("clear")
-  end
+  #end
   
   
 end

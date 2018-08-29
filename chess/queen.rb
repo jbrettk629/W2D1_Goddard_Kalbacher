@@ -9,7 +9,7 @@ class Queen < Piece
     @symbol = "♛"
   end
   
-  def move_dirs
-  end
-  
+  def moves 
+    @moves = self.horizontal_dirs(@position) + self.diagonal_dirs(@position)
+  end 
 end

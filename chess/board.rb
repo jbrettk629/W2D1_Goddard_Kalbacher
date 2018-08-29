@@ -33,7 +33,7 @@ class Board
   def set_starting_pos
     (0..7).each do |row|
       (0..7). each do |col|
-        @grid[row][col].position = [row, col] #unless @grid[row][col].nil?
+        @grid[row][col].position = [row, col] unless @grid[row][col].nil?
       end 
     end
   end 

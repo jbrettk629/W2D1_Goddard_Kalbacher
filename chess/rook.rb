@@ -8,7 +8,8 @@ class Rook < Piece
     @symbol = "♜"
   end
   
-  def move_dirs
+  def moves
+    @moves = self.horizontal_dirs(@position)
   end
   
 end 
